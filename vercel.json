@@ -1,5 +1,5 @@
 {
   "headers": [
-    { "source": "/(.*)\.mpeg", "headers": [{ "key": "Content-Type", "value": "audio/mpeg" }] }
+    { "source": "/:path*.mpeg", "headers": [{ "key": "Content-Type", "value": "audio/mpeg" }] }
   ]
 }
