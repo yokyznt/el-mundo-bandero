@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>El Mundo Bandero</title>
+
+<style>
+:root{
+--negro:#08070a;--negro2:#100b12;--morado:#7b1fa2;
+--rosa:#ff1493;--rosa-claro:#ff69b4;--rosa-pastel:#ff80bd;
+--dorado:#d4af37;--blanco:#f7f3f7;--gris:#c8becb;--gris2:#918692;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:"Segoe UI",Arial,sans-serif;color:var(--blanco);
+background:radial-gradient(circle at 15% 10%,rgba(123,31,162,.22),transparent 28%),var(--negro);
+overflow-x:hidden
+}
+header{
+min-height:92vh;position:relative;overflow:hidden;display:flex;
+align-items:center;justify-content:center;text-align:center;
+background:radial-gradient(circle at center,rgba(255,20,147,.13),var(--negro) 80%)
+}
+header:before{
+content:"";position:absolute;inset:0;
+background:linear-gradient(120deg,transparent 40%,rgba(255,20,147,.1),transparent 60%);
+animation:brillo 8s infinite linear
+}
+@keyframes brillo{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.header-content{position:relative;z-index:5;width:min(900px,90%)}
+.pequeno{color:var(--dorado);letter-spacing:6px;font-size:.85rem;text-transform:uppercase;margin-bottom:18px}
+header h1{
+font-size:clamp(3rem,9vw,7rem);line-height:.95;text-transform:uppercase;
+letter-spacing:3px;margin-bottom:25px;
+text-shadow:0 0 12px rgba(255,20,147,.55),0 0 30px rgba(123,31,162,.6)
+}
+header h1 span{color:var(--rosa)}
+header p{color:var(--gris);font-size:clamp(1rem,3vw,1.35rem);letter-spacing:3px}
+.frase{margin-top:25px;color:var(--dorado);font-style:italic}
+.linea-header{width:180px;height:2px;margin:25px auto;background:linear-gradient(90deg,transparent,var(--rosa),var(--dorado),transparent)}
+.foto{
+position:absolute;width:180px;height:180px;object-fit:cover;border-radius:50%;
+border:2px solid var(--dorado);box-shadow:0 0 20px rgba(255,20,147,.35);
+opacity:.7;z-index:2;animation:flotar 3s ease-in-out infinite
+}
+.foto-izq{left:5%;top:16%}.foto-der{right:5%;top:16%}
+@keyframes flotar{0%,100%{margin-top:0}50%{margin-top:-15px}}
+.tamborista{
+position:absolute;width:190px;bottom:-5px;left:50%;transform:translateX(-50%);
+opacity:.5;filter:drop-shadow(0 0 8px var(--rosa));animation:tambor 3s ease-in-out infinite
+}
+@keyframes tambor{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-12px)}}
+.nota{position:absolute;color:var(--rosa-claro);font-size:2rem;opacity:0;animation:notaSube 8s linear infinite}
+.nota1{left:12%;bottom:0}.nota2{left:25%;bottom:-50px;animation-delay:2s}
+.nota3{right:25%;bottom:-50px;animation-delay:4s}.nota4{right:12%;bottom:0;animation-delay:1s}
+@keyframes notaSube{
+0%{transform:translateY(0);opacity:0}15%{opacity:.8}80%{opacity:.7}
+100%{transform:translateY(-600px) rotate(25deg);opacity:0}
+}
+nav{
+position:sticky;top:0;z-index:1000;display:flex;justify-content:center;flex-wrap:wrap;
+gap:5px;padding:13px;background:rgba(8,7,10,.96);
+border-bottom:1px solid rgba(255,20,147,.5);backdrop-filter:blur(12px)
+}
+nav button{
+background:transparent;border:0;color:var(--gris);padding:9px 16px;
+cursor:pointer;font-size:.9rem;letter-spacing:1px;transition:.3s
+}
+nav button:hover,nav button.active{
+color:white;text-shadow:0 0 8px var(--rosa);border-bottom:2px solid var(--rosa)
+}
+.container{width:min(1100px,92%);margin:auto;padding:70px 0 100px}
+.tab-section{display:none;animation:aparecer .5s ease}
+.tab-section.active{display:block}
+@keyframes aparecer{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.titulo-seccion{display:flex;align-items:center;gap:20px;margin-bottom:12px}
+.numero{font-size:4rem;color:rgba(255,20,147,.6);font-weight:900}
+h2{font-size:clamp(2.1rem,5vw,4rem);color:white;text-transform:uppercase;letter-spacing:2px}
+.subtitulo{color:var(--dorado);letter-spacing:2px;font-size:.85rem;text-transform:uppercase;margin-bottom:25px}
+.linea{width:120px;height:3px;background:linear-gradient(90deg,var(--rosa),var(--dorado));margin:15px 0 35px}
+p{color:var(--gris);line-height:1.9;margin-bottom:20px}
+strong{color:#ff80bd}
+.texto-intro{max-width:850px;font-size:1.08rem}
+.section-image{
+width:100%;height:320px;object-fit:cover;margin:25px 0 40px;
+border-radius:50% / 18%;border:2px solid var(--rosa);
+outline:2px solid rgba(212,175,55,.55);outline-offset:5px;
+box-shadow:0 0 18px rgba(255,20,147,.2);transition:.4s
+}
+.section-image:hover{transform:scale(1.01)}
+
+/* INICIO */
+.texto-inicio{max-width:900px;margin:35px auto 0}
+.texto-inicio p{
+font-size:1.02rem;line-height:1.85;margin:0 0 22px;
+padding:20px 26px;border:1px solid rgba(255,105,180,.45);
+border-radius:45px;background:linear-gradient(110deg,rgba(255,20,147,.10),rgba(123,31,162,.08))
+}
+.texto-inicio .texto-intro{
+font-size:1.08rem;line-height:1.9;
+border:2px solid var(--rosa);border-radius:50px;
+padding:25px 30px;color:#ffe5f1;
+background:linear-gradient(110deg,rgba(255,20,147,.16),rgba(123,31,162,.08))
+}
+.texto-inicio h3{
+color:#ffd166;font-size:1.45rem;letter-spacing:1px;
+margin:42px 0 20px;padding-left:12px
+}
+.texto-inicio h3:after{
+content:"";display:block;width:85px;height:3px;margin-top:12px;
+background:linear-gradient(90deg,var(--rosa),var(--dorado));border-radius:10px
+}
+.texto-inicio strong{color:#ff80bd}
+.destacado{margin:30px 0 40px;padding:0;border:0;background:none}
+.texto-inicio .destacado p{
+border:2px solid var(--dorado);border-radius:50px;
+padding:22px 28px;margin:0;color:#ffe1ef;
+background:rgba(212,175,55,.06)
+}
+
+/* INTRODUCCIONES */
+#marchas>.texto-intro,#toques>.texto-intro,
+#manuales>.texto-intro,#concursos>.texto-intro,
+#referencias>.texto-intro{
+max-width:900px;margin:25px 0 35px;padding:18px 25px;
+border:1px solid rgba(255,105,180,.5);border-radius:40px;
+background:rgba(255,20,147,.06);color:#f3dce9;line-height:1.9
+}
+#marchas>.texto-intro:first-letter,
+#toques>.texto-intro:first-letter,
+#manuales>.texto-intro:first-letter,
+#concursos>.texto-intro:first-letter,
+#referencias>.texto-intro:first-letter{
+color:#ff80bd;font-size:1.5em;font-weight:bold
+}
+
+/* REPERTORIOS */
+.grupo-titulo{margin:60px 0 20px;display:flex;align-items:center;gap:15px}
+.grupo-titulo span{color:var(--dorado);font-size:.75rem;letter-spacing:3px;text-transform:uppercase}
+.grupo-titulo h3{color:white;font-size:1.7rem;font-weight:500}
+.grupo-titulo:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--rosa),transparent)}
+
+/* AUDIOS */
+.audio-card{padding:25px 0 30px;border-bottom:1px solid rgba(255,105,180,.4);transition:.3s}
+.audio-card:hover{padding-left:10px;border-bottom-color:var(--rosa-claro)}
+.audio-card-header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.audio-card-header p{margin:0;color:#ffe0ef;font-size:1.2rem;font-weight:600}
+.audio-numero{color:#ff69b4;margin-right:10px;font-weight:bold}
+.info-btn{
+background:rgba(255,20,147,.16);border:1px solid #ff69b4;
+color:#ff9dcc;padding:6px 14px;cursor:pointer;border-radius:20px;transition:.3s
+}
+.info-btn:hover{background:#ff1493;color:white}
+.extra-info{
+display:none;max-width:850px;margin:15px 0;padding-left:16px;
+border-left:3px solid #ff69b4;color:#f5c9df;line-height:1.9
+}
+.extra-info.show{display:block;animation:aparecer .3s ease}
+
+/* REPRODUCTOR Y BOTÓN PLAY SIEMPRE VISIBLE */
+.audio-control{
+display:flex;align-items:center;gap:12px;margin-top:18px;width:100%
+}
+.play-audio-btn{
+flex-shrink:0;width:48px;height:48px;
+display:flex;align-items:center;justify-content:center;
+border:2px solid #ff69b4;border-radius:50%;
+background:#ffb2d5;color:#541337;
+font-size:20px;font-weight:bold;cursor:pointer;
+box-shadow:0 0 10px rgba(255,20,147,.25);
+transition:transform .2s,background .2s
+}
+.play-audio-btn:hover{background:#ff80bd;transform:scale(1.07)}
+.play-audio-btn:focus-visible{outline:2px solid white;outline-offset:3px}
+.audio-control audio{
+display:block;flex:1;min-width:0;width:100%;height:52px;
+margin:0;border-radius:28px;accent-color:#ff1493;
+color-scheme:light;opacity:1;visibility:visible
+}
+.audio-control audio::-webkit-media-controls{
+display:flex!important;visibility:visible!important
+}
+.audio-control audio::-webkit-media-controls-panel{
+background:#ffb2d5!important
+}
+.audio-control audio::-webkit-media-controls-play-button{
+display:flex!important;visibility:visible!important;opacity:1!important;
+background-color:#ff69b4!important;border-radius:50%
+}
+.audio-control audio::-webkit-media-controls-timeline{
+display:flex!important;visibility:visible!important
+}
+.audio-control audio::-webkit-media-controls-mute-button{
+background-color:#ff69b4!important;border-radius:50%
+}
+.audio-control audio::-webkit-media-controls-current-time-display,
+.audio-control audio::-webkit-media-controls-time-remaining-display{
+color:#541337!important
+}
+
+/* MANUALES */
+.manual{
+padding:25px 5px;margin:35px 0;
+background:linear-gradient(90deg,rgba(123,31,162,.12),transparent 85%);
+border-left:4px solid var(--rosa);border-bottom:1px solid rgba(255,105,180,.3);
+position:relative;transition:.3s
+}
+.manual:hover{padding-left:15px;border-left-color:var(--dorado)}
+.manual-num{color:var(--dorado);font-size:.8rem;letter-spacing:3px;font-weight:bold}
+.manual h3{color:white;font-size:1.4rem;margin:8px 0 12px}
+.manual a{
+display:inline-flex;align-items:center;gap:10px;margin-top:10px;
+background:linear-gradient(135deg,#a91b77,#ff1493);color:white;
+text-decoration:none;padding:10px 22px;border-radius:25px;font-weight:600;transition:.3s
+}
+.manual a:hover{background:linear-gradient(135deg,#ff1493,#d4af37);color:var(--negro)}
+
+/* CONCURSOS */
+.lista-categorias-fluidas{list-style:none;margin:35px 0;max-width:900px}
+.lista-categorias-fluidas li{
+position:relative;padding:18px 10px 18px 42px;
+border-bottom:1px solid rgba(255,105,180,.25);
+color:var(--gris);transition:.3s;line-height:1.8
+}
+.lista-categorias-fluidas li:hover{
+padding-left:48px;color:white;border-bottom-color:var(--rosa)
+}
+.lista-categorias-fluidas li:before{
+content:"♫";position:absolute;left:8px;top:16px;
+color:var(--rosa-claro);font-size:23px;font-weight:bold
+}
+.lista-categorias-fluidas strong{color:#ff80bd;margin-right:8px}
+#concursos>h3{color:var(--dorado);margin:50px 0 15px!important;font-size:1.7rem}
+.concurso-img{
+width:100%;max-height:450px;object-fit:cover;margin:30px 0;
+border-radius:35px 0 35px 0;border-left:4px solid var(--dorado)
+}
+
+/* YOUTUBE */
+.video-btn-container{text-align:center;margin:35px 0}
+.video-btn{
+display:inline-flex;align-items:center;gap:12px;padding:14px 25px;
+background:linear-gradient(135deg,#ff0000,#b30000);color:white;
+text-decoration:none;border-radius:40px;font-weight:bold;
+box-shadow:0 6px 20px rgba(255,0,0,.3);transition:.3s
+}
+.video-btn:hover{transform:scale(1.04)}
+
+/* REFERENCIAS */
+.lista-referencias-fluidas{
+list-style:none;margin:35px 0;max-width:950px;
+display:flex;flex-direction:column;gap:22px
+}
+.lista-referencias-fluidas li{
+position:relative;display:flex;align-items:center;min-height:105px;
+padding:22px 30px 22px 115px;
+border:1px solid rgba(255,105,180,.55);border-radius:100px;
+background:linear-gradient(105deg,rgba(255,20,147,.13),rgba(123,31,162,.12),rgba(212,175,55,.04));
+color:#e7dce7;line-height:1.8;transition:.3s
+}
+.lista-referencias-fluidas li:hover{
+transform:translateX(7px);border-color:var(--dorado);
+background:linear-gradient(105deg,rgba(255,20,147,.2),rgba(123,31,162,.16))
+}
+.lista-referencias-fluidas li span{
+position:absolute;left:18px;top:50%;transform:translateY(-50%);
+width:76px;height:76px;display:flex;align-items:center;justify-content:center;
+border:2px solid var(--rosa-claro);border-radius:50%;
+background:linear-gradient(145deg,#4a123c,#190b20);
+color:#ffb2d5;font-size:.78rem;letter-spacing:1px;font-weight:bold;
+box-shadow:0 0 12px rgba(255,20,147,.18)
+}
+#referencias .lista-referencias-fluidas strong{color:#ff80bd}
+
+/* MÚSICA PRINCIPAL */
+.musica{position:fixed;right:22px;bottom:22px;z-index:2000}
+.musica button{
+width:62px;height:62px;border-radius:50%;border:2px solid #ff69b4;
+background:linear-gradient(145deg,#ff1493,#ff007f);color:white;font-size:1.5rem;
+cursor:pointer;box-shadow:0 0 12px #ff1493,0 0 25px rgba(255,20,147,.5);transition:.3s
+}
+.musica button:hover{transform:scale(1.1)}
+footer{padding:45px 20px;text-align:center;border-top:1px solid rgba(255,20,147,.5);background:#060508}
+footer p{margin:5px;color:var(--gris2);font-size:.9rem}
+footer strong{color:var(--rosa-claro)}
+
+@media(max-width:700px){
+.foto{width:110px;height:110px;opacity:.45}
+.foto-izq{left:2%;top:12%}.foto-der{right:2%;top:12%}
+header h1{font-size:3.3rem}.pequeno{letter-spacing:3px}
+nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+nav button{white-space:nowrap}
+.container{width:90%;padding-top:50px}
+.numero{font-size:2.7rem}
+.audio-card-header{align-items:flex-start}
+.audio-card-header p{font-size:1rem}
+.info-btn{flex-shrink:0}.tamborista{width:140px}
+.section-image{height:240px}
+.texto-inicio{margin-top:25px}
+.texto-inicio h3{font-size:1.25rem;margin-top:38px}
+.texto-inicio p{font-size:.98rem;line-height:1.8;padding:18px 20px}
+.texto-inicio .texto-intro{font-size:1rem;padding:22px}
+.audio-control{gap:8px}
+.play-audio-btn{width:43px;height:43px;font-size:18px}
+.audio-control audio{height:44px}
+.lista-referencias-fluidas li{padding:20px 20px 20px 88px;min-height:95px;border-radius:45px}
+.lista-referencias-fluidas li span{left:10px;width:65px;height:65px;font-size:.68rem}
+}
+@media(max-width:450px){
+.foto{display:none}
+header h1{font-size:2.8rem}
+header p{font-size:.95rem;letter-spacing:1px}
+.titulo-seccion{gap:10px}
+h2{font-size:2rem}.numero{font-size:2rem}
+.section-image{height:190px}
+.lista-referencias-fluidas{gap:16px}
+.lista-referencias-fluidas li{padding:20px 16px 20px 78px;font-size:.92rem}
+.lista-referencias-fluidas li span{width:56px;height:56px;font-size:.6rem;left:8px}
+}
+</style>
+</head>
+
+<body>
+<header>
+<img src="imagenes/izquierda.jpeg" class="foto foto-izq" alt="Banda de Guerra">
+<img src="imagenes/derecha.jpeg" class="foto foto-der" alt="Banda de Guerra">
+<div class="header-content">
+<div class="pequeno">Tambores · Cornetas · Disciplina</div>
+<h1>El Mundo <span>Bandero</span></h1>
+<div class="linea-header"></div>
+<p>Tambores y Cornetas de Banda de Guerra</p>
+<div class="frase">"Disciplina, tradición, música y pasión."</div>
+</div>
+<img src="imagenes/logo.jpg" class="tamborista" alt="Persona tocando tambor">
+<span class="nota nota1">♪</span><span class="nota nota2">♫</span>
+<span class="nota nota3">♭</span><span class="nota nota4">♬</span>
+</header>
+
+<div class="musica">
+<button id="botonMusica" onclick="controlarMusica()" aria-label="Reproducir o pausar música">♪</button>
+<audio id="musicaFondo" loop preload="metadata">
+<source src="audio principal/fondo.mpeg" type="audio/mpeg">
+</audio>
+</div>
+
+<nav>
+<button onclick="showSection('inicio',this)" class="active">Inicio</button>
+<button onclick="showSection('marchas',this)">Marchas</button>
+<button onclick="showSection('toques',this)">Toques</button>
+<button onclick="showSection('manuales',this)">Manuales</button>
+<button onclick="showSection('concursos',this)">Concursos</button>
+<button onclick="showSection('referencias',this)">Referencias</button>
+</nav>
+
+<main class="container">
+
+<!-- INICIO -->
+<section id="inicio" class="tab-section active">
+<div class="titulo-seccion"><div class="numero">01</div><h2>Las Bandas de Guerra</h2></div>
+<div class="subtitulo">Conoce su origen, función y elementos</div>
+<div class="linea"></div>
+<img src="imagenes/inicio.jpeg" class="section-image" alt="Banda de Guerra">
+
+<div class="texto-inicio">
+<p class="texto-intro">
+Una <strong>Banda de Guerra</strong> es un conjunto organizado de personas que interpreta marchas y toques mediante instrumentos de percusión y viento, principalmente tambores y cornetas. Su finalidad también representa disciplina, coordinación, respeto, responsabilidad y trabajo en equipo.
+</p>
+
+<div class="destacado"><p>En México, las Bandas de Guerra forman parte de numerosas ceremonias cívicas y escolares. Participan en honores a la bandera, desfiles, actos conmemorativos, concursos y diferentes eventos oficiales.</p></div>
+
+<h3>¿Cuál es su origen?</h3>
+<p>Las bandas militares surgieron de la necesidad de utilizar sonidos fuertes y reconocibles para transmitir órdenes a grandes distancias. Antes de los medios modernos de comunicación, los tambores y las cornetas permitían indicar movimientos, reuniones y diferentes instrucciones.</p>
+<p>Con el paso del tiempo, estos sonidos dejaron de utilizarse únicamente con fines militares y se convirtieron en parte de diversas tradiciones cívicas y educativas.</p>
+
+<h3>Elementos principales</h3>
+<p>Una Banda de Guerra puede estar integrada por una <strong>sección de tambores</strong> y una <strong>sección de cornetas</strong>. Además, dependiendo de su organización, puede contar con un comandante y un corneta de órdenes.</p>
+<p>El comandante dirige los movimientos generales de la banda. Los integrantes deben mantener la coordinación, una postura correcta y la ejecución simultánea de sus instrumentos.</p>
+
+<h3>Valores que desarrolla</h3>
+<p>La práctica constante puede ayudar a desarrollar disciplina, puntualidad, concentración, coordinación, responsabilidad, compañerismo y respeto. Cada integrante depende del trabajo de los demás.</p>
+
+<h3>Instrumentos</h3>
+<p>Entre los instrumentos más representativos se encuentran el <strong>tambor</strong>, utilizado para marcar ritmos y cadencias, y la <strong>corneta</strong>, utilizada para interpretar melodías, marchas y señales. También existen instrumentos como el clarín, empleado tradicionalmente en algunas unidades militares de artillería y caballería.</p>
+</div>
+</section>
+
+<!-- MARCHAS -->
+<section id="marchas" class="tab-section">
+<div class="titulo-seccion"><div class="numero">02</div><h2>Marchas</h2></div>
+<div class="subtitulo">Ritmo, precisión y tradición</div>
+<div class="linea"></div>
+<img src="imagenes/marchas2.jpeg" class="section-image" alt="Marchas de Banda de Guerra">
+<p class="texto-intro">Las marchas son piezas musicales que requieren coordinación entre las diferentes secciones de una Banda de Guerra. Combinan el ritmo de los tambores con las melodías de las cornetas. Su ejecución requiere cadencia constante, buena postura y sincronización.</p>
+<div id="listaMarchas"></div>
+</section>
+
+<!-- TOQUES -->
+<section id="toques" class="tab-section">
+<div class="titulo-seccion"><div class="numero">03</div><h2>Toques</h2></div>
+<div class="subtitulo">Señales que forman parte de la tradición</div>
+<div class="linea"></div>
+<img src="imagenes/toques2.jpeg" class="section-image" alt="Toques militares">
+<p class="texto-intro">Los toques son señales musicales que históricamente permitieron transmitir indicaciones sin necesidad de comunicación verbal. Cada toque posee un ritmo y una finalidad determinada. Aprenderlos requiere memoria, concentración y práctica constante.</p>
+<div id="listaToques"></div>
+</section>
+
+<!-- MANUALES -->
+<section id="manuales" class="tab-section">
+<div class="titulo-seccion"><div class="numero">04</div><h2>Manuales</h2></div>
+<div class="subtitulo">Material para aprender y consultar</div>
+<div class="linea"></div>
+<img src="imagenes/marchas.jpeg" class="section-image" alt="Manuales">
+<p class="texto-intro">Los manuales sirven como material de consulta para conocer procedimientos, señales, ademanes, posiciones de los instrumentos y diferentes aspectos relacionados con el orden cerrado y los toques militares.</p>
+
+<div class="manual">
+<div class="manual-num">MANUAL 01</div>
+<h3>Manual de Ademanes y Toques Militares 2014</h3>
+<p>Material de consulta sobre nomenclatura de instrumentos, posiciones, señales, ademanes y ejecución de diferentes toques militares.</p>
+<a href="https://es.scribd.com/document/591062097/Manual-BDG-2014" target="_blank" rel="noopener">Consultar manual →</a>
+</div>
+<div class="manual">
+<div class="manual-num">MANUAL 02</div>
+<h3>Manual de Ademanes y Toques Militares 1999</h3>
+<p>Documento de referencia para conocer diferentes toques militares, sus propósitos y señales correspondientes.</p>
+<a href="https://es.scribd.com/doc/51161927/MANUAL-BANDA-DE-GUERRA-1999.link" target="_blank" rel="noopener">Consultar manual →</a>
+</div>
+<div class="manual">
+<div class="manual-num">MANUAL 03</div>
+<h3>Manual de Instrucción de Orden Cerrado (MIOCI-2014)</h3>
+<p>Material relacionado con movimientos, posiciones y procedimientos para realizar ejercicios de orden cerrado.</p>
+<a href="https://es.scribd.com/document/1001028491/MIOCI-2014-Escuela-de-La-Seccion" target="_blank" rel="noopener">Consultar manual →</a>
+</div>
+</section>
+
+<!-- CONCURSOS -->
+<section id="concursos" class="tab-section">
+<div class="titulo-seccion"><div class="numero">05</div><h2>Concursos</h2></div>
+<div class="subtitulo">Preparación, precisión y presentación</div>
+<div class="linea"></div>
+<img src="imagenes/concursos2.jpeg" class="section-image" alt="Concurso de Banda de Guerra">
+<p class="texto-intro">Los concursos de Bandas de Guerra representan una oportunidad para demostrar entrenamiento, disciplina y coordinación. Una buena presentación requiere cuidar la formación, postura, uniformidad, movimientos y trabajo colectivo.</p>
+
+<ul class="lista-categorias-fluidas">
+<li><strong>Categoría Escolar:</strong> participan agrupaciones pertenecientes a instituciones educativas de distintos niveles.</li>
+<li><strong>Categoría Libre:</strong> participan agrupaciones independientes o equipos altamente competitivos.</li>
+<li><strong>Revista:</strong> se revisan presentación, estado de los uniformes, instrumentos y preparación general.</li>
+<li><strong>Orden Cerrado:</strong> se observa la coordinación, disciplina y uniformidad de los movimientos en conjunto.</li>
+<li><strong>Toques Militares:</strong> se evalúa la correcta interpretación y calidad sonora de los toques establecidos.</li>
+<li><strong>Rutina Libre:</strong> permite demostrar creatividad, destreza y dominio avanzado de los instrumentos.</li>
+</ul>
+
+<h3>Rutina libre</h3>
+<p>En una rutina libre, la agrupación presenta una propuesta preparada para mostrar sus capacidades técnicas y creatividad. La coordinación de movimientos, percusiones, cornetas y desplazamientos puede convertirla en una parte muy llamativa.</p>
+<img src="imagenes/libre.png" class="concurso-img" alt="Rutina libre">
+
+<div class="video-btn-container">
+<a href="https://youtu.be/0MBv0w2iC0Q?si=Zhb8SXd-Sys832C8" target="_blank" rel="noopener" class="video-btn">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+Ver rutina completa en YouTube →
+</a>
+</div>
+</section>
+
+<!-- REFERENCIAS -->
+<section id="referencias" class="tab-section">
+<div class="titulo-seccion"><div class="numero">06</div><h2>Referencias</h2></div>
+<div class="subtitulo">Fuentes y material utilizado</div>
+<div class="linea"></div>
+<img src="imagenes/referencias.jpeg" class="section-image" alt="Referencias">
+<p class="texto-intro">La información presentada reúne material documental, referencias relacionadas directamente con Bandas de Guerra y conocimientos obtenidos mediante la práctica y experiencia dentro de esta disciplina.</p>
+
+<ul class="lista-referencias-fluidas">
+<li><span>REF. 01</span> Secretaría de la Defensa Nacional (SEDENA). Manuales oficiales relacionados con Bandas de Guerra, Ademanes, Toques Militares y Orden Cerrado.</li>
+<li><span>REF. 02</span> Manual de Ademanes y Toques Militares, ediciones de referencia 1999 y 2014.</li>
+<li><span>REF. 03</span> Manual de Instrucción de Orden Cerrado de Infantería aplicado a corporaciones y agrupamientos.</li>
+<li><span>REF. 04</span> Organización Nacional de Bandas de Guerra y Escoltas de Bandera (ONBGE).</li>
+<li><span>REF. 05</span> Recopilación de información, tradiciones y experiencias en Bandas de Guerra y Escoltas de Bandera por Silem Campero.</li>
+<li><span>REF. 06</span> Proyecto educativo y cultural: <strong>El Mundo Bandero</strong>.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 El Mundo Bandero realizado por la gran experiencia de la Bandera: Silem Yenai Campero.</p>
+<p>Tambores · Cornetas · Disciplina · Tradición</p>
+</footer>
+
+<script>
+const marchas=[
+["Marcha Ciudadela","audios de marchas/ciudadela.mpeg","Cadencia: 100 ppm. Requiere precisión y coordinación entre tambores y cornetas."],
+["Marcha El Diablo","audios de marchas/diablo.mpeg","Cadencia: 110 ppm. Su ritmo requiere coordinación, limpieza en las percusiones y seguridad."],
+["Marcha Patria","audios de marchas/patria.mpeg","Cadencia: 100 ppm. Tiene un carácter solemne y patriótico. Requiere firmeza y uniformidad."],
+["Marcha Tierra Blanca","audios de marchas/tierra.mpeg","Cadencia: 108 ppm. Permite trabajar la coordinación entre percusión y corneta."],
+["Marcha Marinos","audios de marchas/marinos.mpeg","Cadencia: 104 ppm. Permite trabajar la seguridad, marcialidad y precisión."],
+["Marcha Brasil","audios de marchas/brasil.mpeg","Cadencia: 112 ppm. Requiere uniformidad y control del ritmo."],
+["Marcha Infantería","audios de marchas/infanteria.mpeg","Cadencia: 100 ppm. Exige una ejecución firme y coordinada."],
+["Marcha La Coqueta","audios de marchas/coqueta.mpeg","Cadencia: 115 ppm. Sus cambios requieren atención y coordinación."],
+["Marcha Dragona","audios de marchas/dragona.mpeg","Cadencia: 110 ppm. Requiere coordinación entre cornetas y tambores."],
+["Marcha Sambre-Et-Meuse","audios de marchas/sambre.mpeg","Cadencia: 120 ppm. Marcha de origen internacional que requiere ejecución coordinada."]
+];
+
+const toques=[
+["Orden","audios de toques/orden.mpeg","Cadencia: 120 ppm. Se utiliza para llamar la atención y preparar al personal para recibir indicaciones."],
+["Llamada de arrestados","audios de toques/arrestados.mpeg","Cadencia: 80 ppm. Toque relacionado históricamente con avisos de carácter disciplinario."],
+["Reunión","audios de toques/reunion.mpeg","Cadencia: 100 ppm. Indica la concentración del personal en un lugar establecido."],
+["Instrucción","audios de toques/instruccion.mpeg","Cadencia: 110 ppm. Señala el comienzo de actividades de instrucción y adiestramiento."],
+["Paso acelerado","audios de toques/acelerado.mpeg","Cadencia: 120 ppm. Se relaciona con un desplazamiento más rápido que el paso redoblado."],
+["Fajina","audios de toques/fajina.mpeg","Cadencia: 115 ppm. Se relaciona con actividades de alimentación, limpieza, mantenimiento o faenas."],
+["Paso redoblado","audios de toques/redoblado.mpeg","Cadencia: 100 ppm. Es uno de los ritmos fundamentales para los desplazamientos y marchas."],
+["Silencio","audios de toques/silencio.mpeg","Cadencia: 70 ppm. Indica el cese de determinadas actividades y se relaciona tradicionalmente con el descanso nocturno."],
+["Ataque","audios de toques/ataque.mpeg","Cadencia: 130 ppm. Toque de carácter histórico y táctico asociado con el avance militar."],
+["Tres de Diana","audios de toques/diana.mpeg","Cadencia: 110 ppm. Toque utilizado en determinadas ceremonias y celebraciones."]
+];
+
+function crearAudios(lista,contenedor,prefijo,tipo){
+const destino=document.getElementById(contenedor);
+
+lista.forEach((item,i)=>{
+if(tipo==="marcha"&&i===0){
+destino.insertAdjacentHTML("beforeend",
+'<div class="grupo-titulo"><span>Tradicional</span><h3>Repertorio tradicional</h3></div>');
+}
+if(tipo==="marcha"&&i===5){
+destino.insertAdjacentHTML("beforeend",
+'<div class="grupo-titulo"><span>Reglamentario</span><h3>Repertorio reglamentario</h3></div>');
+}
+
+const tarjeta=document.createElement("div");
+tarjeta.className="audio-card";
+
+const encabezado=document.createElement("div");
+encabezado.className="audio-card-header";
+
+const titulo=document.createElement("p");
+const numero=document.createElement("span");
+numero.className="audio-numero";
+numero.textContent=String(i+1).padStart(2,"0");
+titulo.append(numero,document.createTextNode(item[0]));
+
+const boton=document.createElement("button");
+boton.className="info-btn";
+boton.textContent="+ Info";
+boton.onclick=()=>toggleInfo(prefijo+i);
+boton.setAttribute("aria-label","Mostrar información de "+item[0]);
+
+encabezado.append(titulo,boton);
+
+const info=document.createElement("div");
+info.className="extra-info";
+info.id=prefijo+i;
+info.textContent=item[2];
+
+const reproductor=document.createElement("audio");
+reproductor.controls=true;
+reproductor.preload="metadata";
+
+const fuente=document.createElement("source");
+fuente.src=item[1];
+fuente.type="audio/mpeg";
+reproductor.appendChild(fuente);
+reproductor.appendChild(document.createTextNode("Tu navegador no puede reproducir este audio."));
+
+/* CONTENEDOR Y BOTÓN PLAY VISIBLE */
+const controles=document.createElement("div");
+controles.className="audio-control";
+
+const playBtn=document.createElement("button");
+playBtn.className="play-audio-btn";
+playBtn.type="button";
+playBtn.textContent="▶";
+playBtn.setAttribute("aria-label","Reproducir "+item[0]);
+playBtn.title="Reproducir";
+
+playBtn.addEventListener("click",()=>{
+if(reproductor.paused){
+reproductor.play().catch(()=>{
+alert("No se pudo reproducir el audio. Revisa el nombre y la ubicación del archivo.");
+});
+}else{
+reproductor.pause();
+}
+});
+
+reproductor.addEventListener("play",()=>{
+playBtn.textContent="❚❚";
+playBtn.setAttribute("aria-label","Pausar "+item[0]);
+playBtn.title="Pausar";
+});
+
+reproductor.addEventListener("pause",()=>{
+playBtn.textContent="▶";
+playBtn.setAttribute("aria-label","Reproducir "+item[0]);
+playBtn.title="Reproducir";
+});
+
+reproductor.addEventListener("ended",()=>{
+playBtn.textContent="▶";
+playBtn.setAttribute("aria-label","Reproducir "+item[0]);
+playBtn.title="Reproducir";
+});
+
+controles.append(playBtn,reproductor);
+tarjeta.append(encabezado,info,controles);
+destino.appendChild(tarjeta);
+});
+}
+
+crearAudios(marchas,"listaMarchas","m","marcha");
+crearAudios(toques,"listaToques","t","toque");
+
+function showSection(id,boton){
+document.querySelectorAll(".tab-section").forEach(s=>s.classList.remove("active"));
+document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+boton.classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toggleInfo(id){
+document.getElementById(id).classList.toggle("show");
+}
+
+function controlarMusica(){
+const audio=document.getElementById("musicaFondo");
+const boton=document.getElementById("botonMusica");
+
+if(audio.paused){
+audio.play().then(()=>boton.textContent="❚❚").catch(()=>{
+boton.textContent="♪";
+alert("No se pudo reproducir la música. Revisa el nombre y la ubicación del archivo.");
+});
+}else{
+audio.pause();
+boton.textContent="♪";
+}
+}
+
+/* EVITA QUE SE REPRODUZCAN VARIOS AUDIOS A LA VEZ */
+document.addEventListener("play",function(e){
+if(e.target.tagName==="AUDIO"&&e.target.id!=="musicaFondo"){
+document.querySelectorAll("audio").forEach(a=>{
+if(a!==e.target&&a.id!=="musicaFondo")a.pause();
+});
+}
+},true);
+
+document.getElementById("musicaFondo").addEventListener("pause",()=>{
+document.getElementById("botonMusica").textContent="♪";
+});
+</script>
+</body>
+</html>
